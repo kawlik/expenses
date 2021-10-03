@@ -1,3 +1,8 @@
+html {
+
+    scroll-behavior: smooth;
+}
+
 body {
     
     height: 100vh;
@@ -13,3 +18,135 @@ body {
 }
 
 /*   *   *   *   *   *   *   *   *   *   */
+
+#view-container {
+
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+
+    height: 100%;
+    width: 100%;
+}
+
+#view-content {
+
+    flex-grow: 1;
+    
+    overflow-y: scroll;
+
+    animation-name: easeIn;
+    animation-duration: 0.3s;
+    animation-delay: 0;
+
+    animation-timing-function: linear;
+    animation-direction: normal;
+    animation-fill-mode: both;
+
+    &.left {
+
+        animation-name: swipeLeft;
+    }
+    
+    &.right {
+
+        animation-name: swipeRight;
+    }
+}
+
+#view-selector {
+
+    position: sticky;
+    bottom: 0;
+
+    box-shadow: 0 5px 20px grey;
+
+    li {
+
+        svg {
+
+            color: #434343;
+            transition: all ease-in-out .2s;
+        }
+
+        &.active {
+
+            svg {
+
+                color: gold;
+            }
+        }
+    }
+
+    button {
+
+        position: relative;
+
+        small {
+
+            position: absolute;
+
+            bottom: 0;
+            left: 50%;
+
+            transform: translateX( -50% ) translateY( 50% );
+            
+            color: grey;
+            font-size: small;
+        }
+    }
+}
+
+/*   *   *   *   *   *   *   *   *   *   */
+
+@keyframes easeIn {
+    
+    from {
+
+        opacity: 0;
+
+        transform: scale( 0.5 );
+
+    } to {
+
+        opacity: 1;
+
+        transform: scale( 1 );
+    }
+}
+
+@keyframes swipeLeft {
+    
+    from {
+
+        opacity: 0;
+
+        transform: translateX( -100% );
+
+    } to {
+
+        opacity: 1;
+
+        transform: translateX( 0 );
+    }
+}
+
+@keyframes swipeRight {
+    
+    from {
+
+        opacity: 0;
+
+        transform: translateX( 100% );
+
+    } to {
+
+        opacity: 1;
+
+        transform: translateX( 0 );
+    }
+}

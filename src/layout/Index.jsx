@@ -26,7 +26,7 @@ const Index = () => {
     return(
     <>
 
-        { user ? <View /> : <Login /> }
+        { !user ? <View /> : <Login /> }
 
     </>
     );
