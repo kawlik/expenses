@@ -36,15 +36,18 @@ const View = () => {
 
         if( !touch.x || !touch.y ) { return; }
 
-
         const next_x = event.touches[0].clientX;
         const next_y = event.touches[0].clientY;
         
         const delta_x = touch.x - next_x;
         const delta_y = touch.y - next_y;
-        
 
-        if( Math.abs( delta_x ) > Math.abs( delta_y ) && Math.abs( delta_x ) > 100 + window.innerHeight / 5 ) {
+
+        document.querySelector( '#view-content' ).style.transition = null;
+        document.querySelector( '#view-content' ).style.transform = `translateX( ${ -0.8 * delta_x }px )`;
+
+
+        if( Math.abs( delta_x ) > Math.abs( delta_y ) && Math.abs( delta_x ) > 150  ) {
 
             const min = 0;
             const max = config.views.list.length - 1;
@@ -61,8 +64,16 @@ const View = () => {
                 setView( config.views.list[ idx + 1 ] );
                 setSwipe( 'right' );
             };
+
         }
     };
+
+    const handleTouchEnd = ( event ) => {
+
+        document.querySelector( '#view-content' ).style.transition = 'all ease-in-out 0.5s';
+        document.querySelector( '#view-content' ).style.transform = null;
+
+    }
 
     /*   *   *   *   *   *   *   *   */
 
@@ -71,11 +82,14 @@ const View = () => {
 
         document.addEventListener( 'touchstart', handleTouchStart );
         document.addEventListener( 'touchmove', handleTouchMove );
+        document.addEventListener( 'touchend', handleTouchEnd );
 
     return () => {
         
         document.removeEventListener( 'touchstart', handleTouchStart );
         document.removeEventListener( 'touchmove', handleTouchMove );
+        document.removeEventListener( 'touchend', handleTouchEnd );
+
 
     }}, [ view ]);
 

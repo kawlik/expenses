@@ -41,7 +41,7 @@ const Login = () => {
 
                     <input id='login-token' className='form-control' type='password' placeholder='Token logowania' style={{ borderRadius: '10px' }}/>
 
-                    <label for='login-token'>
+                    <label htmlFor='login-token'>
                         Token logowania
                     </label>
 
@@ -67,8 +67,11 @@ const Login = () => {
 
 
                 <button className='w-100 btn btn-lg btn-outline-primary my-2' type='button' style={{ borderRadius: '10px' }}>
+
                     <span style={{ marginRight: '10px', verticalAlign: 'middle' }}><FacebookIcon style={{ fontSize: '36px' }} /></span>
+
                     <span style={{ verticalAlign: 'middle' }}>Zaloguj z Facebook</span>
+                    
                 </button>
 
             </div>

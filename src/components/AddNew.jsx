@@ -34,9 +34,9 @@ const AddNew = () => {
 
             <select value={ participant } onChange={ selectParticipant } className='form-select my-2' style={{ height: '42px', borderRadius: '10px' }}>
 
-                <option value='1'>1</option>
-                <option value='2'>2</option>
-                <option value='3'>3</option>
+                <option value='Imię Nazwisko'>Imię Nazwisko</option>
+                <option value='Imię Nazwisko'>Imię Nazwisko</option>
+                <option value='Imię Nazwisko'>Imię Nazwisko</option>
                 
             </select>
 

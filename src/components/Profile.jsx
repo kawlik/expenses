@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 
 // additional components
@@ -14,6 +14,13 @@ import SearchIcon from '@mui/icons-material/Search';
 /*   *   *   *   *   *   *   *   *   *   */
 
 const Profile = () => {
+
+
+    const [ friend, setFriend ] = useState( '' );
+
+    const changeFriend = ( event ) => {
+        setFriend( event.target.value );
+    };
 
     /*   *   *   *   *   *   *   *   */
 
@@ -32,7 +39,7 @@ const Profile = () => {
             
             <div className='input-group'>
 
-                <input value={ '' } onChange={ () => {} } type='text' className='form-control' placeholder='Wyszukaj znajomego' style={{ height: '42px', borderTopLeftRadius: '10px', borderBottomLeftRadius: '10px' }} />
+                <input value={ friend } onChange={ changeFriend } type='text' className='form-control' placeholder='Wyszukaj znajomego' style={{ height: '42px', borderTopLeftRadius: '10px', borderBottomLeftRadius: '10px' }} />
                 
                 <span className='input-group-text' style={{ height: '42px', borderTopRightRadius: '10px', borderBottomRightRadius: '10px' }}>
                     <SearchIcon />

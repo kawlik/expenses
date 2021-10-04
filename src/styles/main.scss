@@ -47,8 +47,8 @@ body {
     animation-delay: 0;
 
     animation-timing-function: linear;
+    animation-fill-mode: backwards;
     animation-direction: normal;
-    animation-fill-mode: both;
 
     &.left {
 
