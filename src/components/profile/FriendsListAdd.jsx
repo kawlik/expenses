@@ -1,6 +1,10 @@
 import React from 'react';
 
 
+// local components
+import SelectUser from '../SelectUser';
+
+
 // icons
 import AddBoxIcon from '@mui/icons-material/AddBox';
 
@@ -13,24 +17,35 @@ const FriendsListAdd = () => {
     /*   *   *   *   *   *   *   *   */
 
     return(
-    <>     
-        <li className='w-100 mb-4' style={{ listStyle: 'none' }}>
+    <>        
+        <ul className='list-group border p-1 mb-2' style={{ overflowY: 'scroll', maxHeight: '40vh', borderRadius: '10px' }}>
 
-            <span style={{ verticalAlign: 'middle', marginRight: '10px' }}><img src='https://picsum.photos/200' alt='tmp-alt-text' style={{ width: '32px', height:' 32px', borderRadius: '32px' }} /></span>
-
-            <span style={{ verticalAlign: 'middle', fontSize: '20px', fontWeight: '300' }}>
-                Imię Nazwisko
-            </span>
-
-            <button className='w-100 btn btn-outline-success mt-2' type='button' style={{ height: '42px', borderRadius: '10px' }}>
-
-                <span style={{ marginRight: '10px', verticalAlign: 'middle' }}><AddBoxIcon style={{ fontSize: '24px' }} /></span>
+            <SelectUser />
                 
-                <span style={{ verticalAlign: 'middle' }}>Dodaj</span>
+            <SelectUser />
 
-            </button>
+            <SelectUser />
 
-        </li>
+            <SelectUser />
+
+            <SelectUser />
+
+            <SelectUser />
+
+            <SelectUser />
+
+            <SelectUser />
+
+        </ul>
+
+        <button disabled={ true } className='w-100 btn btn-outline-success' type='button' style={{ height: '42px', borderRadius: '10px' }}>
+
+            <span style={{ marginRight: '10px', verticalAlign: 'middle' }}><AddBoxIcon style={{ fontSize: '24px' }} /></span>
+
+            <span style={{ verticalAlign: 'middle' }}>Dodaj</span>
+
+        </button>
+
     </>
     );
 };

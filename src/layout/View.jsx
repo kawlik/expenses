@@ -24,7 +24,7 @@ const View = () => {
     /*   *   *   *   *   *   *   *   */
 
 
-    const touch = { x: null, y: null, delta_x: null };
+    const touch = { x: null, y: null };
 
     const handleTouchStart = ( event ) => {
 
@@ -45,12 +45,13 @@ const View = () => {
         const delta_x = touch.x - next_x;
         const delta_y = touch.y - next_y;
 
-        touch.delta_x = delta_x;
-
         
-        document.querySelector( '#view-content' ).style.opacity = Math.max( 1 - ( Math.abs( delta_x ) / swipe_w ), 0 );
-        document.querySelector( '#view-content' ).style.transition = null;
-        document.querySelector( '#view-content' ).style.transform = `translateX( ${swipe_v * delta_x }px )`;
+        if( Math.abs( delta_x ) > Math.abs( delta_y )) {
+
+            document.querySelector( '#view-content' ).style.transition = null;
+            document.querySelector( '#view-content' ).style.opacity = Math.max( 1 - ( Math.abs( delta_x ) / swipe_w ), 0 );
+            document.querySelector( '#view-content' ).style.transform = `translateX( ${swipe_v * delta_x }px )`;
+        }
 
 
         if( Math.abs( delta_x ) > Math.abs( delta_y ) && Math.abs( delta_x ) > swipe_w  ) {

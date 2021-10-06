@@ -13,6 +13,8 @@ const AddNew = () => {
 
     const [ name, setName ] = useState( '' );
     const [ price, setPrice ] = useState( '' );
+    const [ participant, setParticipant ] = useState( '' );
+
 
     const changeName = ( event ) => {
         setName( event.target.value );
@@ -22,11 +24,26 @@ const AddNew = () => {
         setPrice( event.target.value );
     };
 
+    const selectParticipant = ( event ) => {
+        setParticipant( event.target.value );
+    };
+
     /*   *   *   *   *   *   *   *   */
 
     return(
     <>
         <div className='row my-1 py-1'>
+
+            <div className='col-12 mb-3'>
+
+                <select value={ participant } onChange={ selectParticipant } className='form-select' style={{ height: '42px', borderRadius: '10px' }}>
+
+                    <option value='Imię Nazwisko'>Imię Nazwisko</option>
+                    <option value='Imię Nazwisko'>Imię Nazwisko</option>
+                
+                </select>
+
+            </div>
 
             <div className='col-12 mb-3'>
                 <input value={ name } onChange={ changeName } type='text' className='form-control' placeholder='Wydatek' style={{ height: '42px', borderRadius: '10px' }} />
@@ -43,7 +60,7 @@ const AddNew = () => {
             </div>
 
             <div className='col-12'>
-                <button disabled={ name === '' || price === '' } type='button' className='btn btn-outline-success w-100' style={{ height: '42px', borderRadius: '10px' }}>
+                <button disabled={ name === '' || price === '' || participant === '' } type='button' className='btn btn-outline-success w-100' style={{ height: '42px', borderRadius: '10px' }}>
 
                     <span style={{ marginRight: '10px', verticalAlign: 'middle' }}><AddBoxIcon style={{ fontSize: '24px' }} /></span>
                 
