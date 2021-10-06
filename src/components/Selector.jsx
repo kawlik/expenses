@@ -20,10 +20,10 @@ const Selector = ({ view, setView, setSwipe }) => {
 
     return(
     <>        
-        <nav className='nav navbar-dark bg-light row p-2 pb-3 w-100' id='view-selector'>
+        <nav className='nav navbar-dark bg-light row p-2 w-100' id='view-selector'>
 
-            <li className={`col-3 row mx-auto ${ view === config.views.name.saved && 'active' }`}>
-                <button className='mx-auto btn' onClick={() => { setView( config.views.name.saved ); setSwipe( null); }}>
+            <li className={`col-3 row mx-auto  ${ view === config.views.name.saved && 'active' }`}>
+                <button className='mx-auto btn pb-3' onClick={() => { setView( config.views.name.saved ); setSwipe( null); }}>
                     
                     <SaveIcon style={{ fontSize: '28px' }} />
 
@@ -33,7 +33,7 @@ const Selector = ({ view, setView, setSwipe }) => {
             </li>
 
             <li className={`col-3 row mx-auto ${ view === config.views.name.active && 'active' }`}>
-                <button className='mx-auto btn' onClick={() => { setView( config.views.name.active ); setSwipe( null); }}>
+                <button className='mx-auto btn pb-3' onClick={() => { setView( config.views.name.active ); setSwipe( null); }}>
 
                     <AddShoppingCartIcon style={{ fontSize: '28px' }} />
 
@@ -44,7 +44,7 @@ const Selector = ({ view, setView, setSwipe }) => {
 
             
             <li className={`col-3 row mx-auto ${ view === config.views.name.profile && 'active' }`}>
-                <button className='mx-auto btn' onClick={() => { setView( config.views.name.profile ); setSwipe( null); }}>
+                <button className='mx-auto btn pb-3' onClick={() => { setView( config.views.name.profile ); setSwipe( null); }}>
 
                     <AccountBoxIcon style={{ fontSize: '28px' }} />
 
