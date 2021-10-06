@@ -36,7 +36,7 @@ const View = () => {
 
         if( !touch.x || !touch.y ) { return; }
 
-        const swipe_w = 2 * window.innerWidth / 3;
+        const swipe_w = Math.min( window.innerWidth / 2, 300 );
         const swipe_v = -0.8;
 
         const next_x = event.touches[0].clientX;
@@ -48,7 +48,7 @@ const View = () => {
         touch.delta_x = delta_x;
 
         
-        document.querySelector( '#view-content' ).style.opacity = 1 - ( Math.abs( delta_x ) / swipe_w );
+        document.querySelector( '#view-content' ).style.opacity = Math.max( 1 - ( Math.abs( delta_x ) / swipe_w ), 0 );
         document.querySelector( '#view-content' ).style.transition = null;
         document.querySelector( '#view-content' ).style.transform = `translateX( ${swipe_v * delta_x }px )`;
 
