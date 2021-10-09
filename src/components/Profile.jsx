@@ -9,7 +9,7 @@ import { StoreContext } from '../context';
 
 // global config
 import config from '../utility/config';
-import { getData, putData, deleteData, fetchFriends } from '../utility/api';
+import { getData, putData, fetchFriends } from '../utility/api';
 
 // icons
 import SearchIcon from '@mui/icons-material/Search';
@@ -59,6 +59,8 @@ const Profile = () => {
 
             user.friends = await fetchFriends( buffer );
         
+            setSearchFriend( '' );
+            setSearchResult( [] );
             setUser( user );
 
         } catch( err ) {
@@ -72,10 +74,12 @@ const Profile = () => {
 
         try {
 
-            const buffer = await deleteData( config.API.link.user.delete.deleteUserAsFriend_userID, userID, { auth: user.auth });
+            const buffer = await putData( config.API.link.user.put.romoveUserAsFriend_userID, userID, { auth: user.auth });
 
             user.friends = await fetchFriends( buffer );
         
+            setSearchFriend( '' );
+            setSearchResult( [] );
             setUser( user );
 
         } catch( err ) {

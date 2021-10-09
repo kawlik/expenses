@@ -109,38 +109,6 @@ const putData = async ( path, param, body ) => {
 };
 
 
-const deleteData = async ( path, param, body ) => {
-
-    try {
-
-        // making request
-        const req = await axios.delete( makePath( path, param ), body );
-        
-        // parsing response
-        const res = req?.data;
-            
-        // test res
-        if( res?.success ) {
-
-            // returns response
-            return res.response;
-
-        } else {
-
-            throw new Error( 'Request could not be processed!' );
-        }
-
-    } catch( err ) {
-
-        // error message
-        console.error( err );
-
-        // safe return value
-        return null;
-    }
-};
-
-
 const fetchFriends = async ( user ) => {
 
     try {
@@ -170,4 +138,4 @@ const fetchFriends = async ( user ) => {
 /*  Module export
 /*   *   *   *   *   *   *   *   *   *   */
 
-export { getData, postData, putData, deleteData, fetchFriends };
+export { getData, postData, putData, fetchFriends };

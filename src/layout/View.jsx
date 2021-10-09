@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react';
-
+import React, { useState, useEffect, useContext } from 'react';
 
 // local components
 import Active from '../components/Active';
 import Profile from '../components/Profile';
 import Saved from '../components/Saved';
 import Selector from '../components/Selector';
-
 
 // global config
 import config from '../utility/config';
@@ -16,7 +14,6 @@ import config from '../utility/config';
 /*   *   *   *   *   *   *   *   *   *   */
 
 const View = () => {
-
 
     const [ view, setView ] = useState( config.views.name.profile );
     const [ swipe, setSwipe ] = useState( null );

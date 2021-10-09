@@ -66,11 +66,7 @@ export default {
                 put: {
 
                     addNewAsFriendBy_userID: '/user/add/',
-                },
-
-                delete: {
-
-                    deleteUserAsFriend_userID: '/user/delete/',
+                    romoveUserAsFriend_userID: '/user/remove/'
                 },
             },
         },
