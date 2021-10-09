@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 
 // icons
@@ -7,6 +7,11 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 
 // store context
 import { StoreContext } from '../context';
+
+
+// global config
+import config from '../utility/config';
+import { getData } from '../utility/api';
 
 
 
@@ -19,6 +24,52 @@ const Login = () => {
     // context values
     const { setUser } = useContext( StoreContext );
 
+    // state values
+    const [ auth, setAuth ] = useState( '' );
+
+
+    const changeAuth = ( event ) => {
+        setAuth( event.target.value );
+    };
+
+    const requestLogin = async () => {
+        
+        const user = await getData( config.API.link.user.get.findOneBy_auth, auth );
+
+        if( auth === user.auth ) {
+
+            setUser( user );
+        };
+    };
+
+    const autoLogin = async ( auth ) => {
+
+        const user = await getData( config.API.link.user.get.findOneBy_auth, auth );
+
+        if( auth === user?.auth ) {
+
+            setUser( user );
+        };
+    };
+
+    /*   *   *   *   *   *   *   *   */
+
+    useEffect(() => {
+
+        // init url search
+        const url = new URL( window.location.href );
+        const params = new URLSearchParams( url.search );
+
+        // proces login with url
+        if( params.has( 'auth' )) {
+
+            autoLogin( params.get( 'auth' ));
+        }
+
+        // clears url history
+        window.history.replaceState( null, document.title, window.location.pathname );
+
+    }, []);
 
     /*   *   *   *   *   *   *   *   */
 
@@ -36,43 +87,19 @@ const Login = () => {
                     Logowanie
                 </h2>
 
+                <a href={ config.API.auth.facebook } className='w-100 btn btn-outline-primary mb-2' type='button' style={{ height: '42px', borderRadius: '10px' }}>
 
-                <div className='form-floating my-2'>
-
-                    <input id='login-token' className='form-control' type='password' placeholder='Token logowania' style={{ borderRadius: '10px' }}/>
-
-                    <label htmlFor='login-token'>
-                        Token logowania
-                    </label>
-
-                </div>
-                
-
-                <button className='w-100 btn btn-lg btn-success my-2' type='button' style={{ borderRadius: '10px' }}>
-                    Zaloguj
-                </button>
-
-
-                <small className='text-muted'>
-                    Do zalogowania się konieczne jest uzyskanie z serwisu Facebook indywidualnego tokenu logowania.
-                </small>
-
-
-                <hr className='my-4'></hr>
-
-
-                <h2 className='fw-bold fs-5'>
-                    Pobierz token logowania
-                </h2>
-
-
-                <button className='w-100 btn btn-lg btn-outline-primary my-2' type='button' style={{ borderRadius: '10px' }}>
-
-                    <span style={{ marginRight: '10px', verticalAlign: 'middle' }}><FacebookIcon style={{ fontSize: '36px' }} /></span>
+                    <span style={{ marginRight: '10px', verticalAlign: 'middle' }}><FacebookIcon style={{ fontSize: '28px' }} /></span>
 
                     <span style={{ verticalAlign: 'middle' }}>Zaloguj z Facebook</span>
                     
-                </button>
+                </a>
+
+                <hr className='mb-3' />
+
+                <small className='text-muted'>
+                    Do zalogowania się konieczne jest skorzystanie z wybranego serwisu społecznościowego. Korzystanie z takiej metody logowania zwiększa bezpieczeństwo i zmniejsza ilość koniecznych do zapamiętania haseł.
+                </small>
 
             </div>
 

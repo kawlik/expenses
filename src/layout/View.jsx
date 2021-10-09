@@ -36,8 +36,8 @@ const View = () => {
 
         if( !touch.x || !touch.y ) { return; }
 
-        const swipe_w = Math.min( window.innerWidth / 2, 300 );
-        const swipe_v = -0.8;
+        const swipe_w = Math.min( window.innerWidth / 3, 300 );
+        const swipe_v = 0.33;
 
         const next_x = event.touches[0].clientX;
         const next_y = event.touches[0].clientY;
@@ -45,16 +45,20 @@ const View = () => {
         const delta_x = touch.x - next_x;
         const delta_y = touch.y - next_y;
 
-        
+
         if( Math.abs( delta_x ) > Math.abs( delta_y )) {
 
+            const direction = delta_x <= 0 ? 1 : -1;
+            const opcacity =  Math.max( 1 - (( Math.abs( delta_x ) - Math.abs( delta_y )) / swipe_w ), 0 );
+            const transform = direction * swipe_v * ( Math.abs( delta_x ) - Math.abs( delta_y ));
+            
             document.querySelector( '#view-content' ).style.transition = null;
-            document.querySelector( '#view-content' ).style.opacity = Math.max( 1 - ( Math.abs( delta_x ) / swipe_w ), 0 );
-            document.querySelector( '#view-content' ).style.transform = `translateX( ${swipe_v * delta_x }px )`;
+            document.querySelector( '#view-content' ).style.opacity = opcacity;
+            document.querySelector( '#view-content' ).style.transform = `translateX( ${transform}px )`;
         }
 
 
-        if( Math.abs( delta_x ) > Math.abs( delta_y ) && Math.abs( delta_x ) > swipe_w  ) {
+        if( Math.abs( delta_x ) > Math.abs( delta_y ) && Math.abs( delta_x ) - Math.abs( delta_y ) > swipe_w  ) {
 
             const min = 0;
             const max = config.views.list.length - 1;
