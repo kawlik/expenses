@@ -4,7 +4,7 @@ import React from 'react';
 /*  Module schema
 /*   *   *   *   *   *   *   *   *   *   */
 
-const SelectUser = ({ user, selectUser }) => {
+const SelectUser = ({ user }) => {
 
     /*   *   *   *   *   *   *   *   */
 

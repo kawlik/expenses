@@ -1,18 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
 
-
 // icons
 import FacebookIcon from '@mui/icons-material/Facebook';
-
 
 // store context
 import { StoreContext } from '../context';
 
-
 // global config
 import config from '../utility/config';
-import { getData } from '../utility/api';
-
+import { getData, fetchFriends } from '../utility/api';
 
 
 /*  Module schema
@@ -20,36 +16,25 @@ import { getData } from '../utility/api';
 
 const Login = () => {
 
-
-    // context values
     const { setUser } = useContext( StoreContext );
-
-    // state values
-    const [ auth, setAuth ] = useState( '' );
-
-
-    const changeAuth = ( event ) => {
-        setAuth( event.target.value );
-    };
-
-    const requestLogin = async () => {
-        
-        const user = await getData( config.API.link.user.get.findOneBy_auth, auth );
-
-        if( auth === user.auth ) {
-
-            setUser( user );
-        };
-    };
 
     const autoLogin = async ( auth ) => {
 
-        const user = await getData( config.API.link.user.get.findOneBy_auth, auth );
+        try {
 
-        if( auth === user?.auth ) {
+            const user = await getData( config.API.link.user.get.findOneBy_auth, auth );
 
-            setUser( user );
-        };
+            if( auth === user?.auth ) { 
+
+                user.friends = await fetchFriends( user );
+        
+                setUser( user );
+            };
+            
+        } catch( err ) {
+
+            return console.error( err );
+        }
     };
 
     /*   *   *   *   *   *   *   *   */

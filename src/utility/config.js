@@ -59,16 +59,16 @@ export default {
                 get: {
 
                     findOneBy_auth: '/user/auth/',
-                    findOneBy_name: '/user/name/',
+                    findAllBy_name: '/user/name/',
                     findOneBy_userID: '/user/id/',
                 },
 
-                post: {
+                put: {
 
                     addNewAsFriendBy_userID: '/user/add/',
                 },
 
-                put: {
+                delete: {
 
                     deleteUserAsFriend_userID: '/user/delete/',
                 },
