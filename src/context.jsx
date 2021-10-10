@@ -16,6 +16,7 @@ const StoreProvider = ({ children }) => {
 
 
     const [ user, setUser ] = useState( null );
+    const [ list, setList ] = useState( null );
 
 
     /*   *   *   *   *   *   *   *   */
@@ -23,6 +24,8 @@ const StoreProvider = ({ children }) => {
     const storeValues = {
 
         user, setUser,  //  user propeties
+
+        list, setList,  //  list propeties
     };
 
     /*   *   *   *   *   *   *   *   */

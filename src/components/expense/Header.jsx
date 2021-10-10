@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 // icons
 import LocalAtmIcon from '@mui/icons-material/LocalAtm';
 
@@ -8,13 +7,13 @@ import LocalAtmIcon from '@mui/icons-material/LocalAtm';
 /*  Module schema
 /*   *   *   *   *   *   *   *   *   *   */
 
-const Header = () => {
+const Header = ({ list }) => {
 
     /*   *   *   *   *   *   *   *   */
 
     return(
     <>
-        <h4 className='lead'>10-10-2021</h4>
+        <h4 className='lead'>{ list.date.split('T')[0] }</h4>
             
         <div className='py-1 w-100'>
                 

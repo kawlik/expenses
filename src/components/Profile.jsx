@@ -61,7 +61,6 @@ const Profile = () => {
         
             setSearchFriend( '' );
             setSearchResult( [] );
-            setUser( user );
 
         } catch( err ) {
 
@@ -80,7 +79,6 @@ const Profile = () => {
         
             setSearchFriend( '' );
             setSearchResult( [] );
-            setUser( user );
 
         } catch( err ) {
 
@@ -113,18 +111,23 @@ const Profile = () => {
 
             </div>
 
-            <div className='my-2'>
+            {
+                !searchResult.length
+                ? null
+                : (
+                    <div className='my-2'>
 
-                <ul className='list-group border p-1 mb-2' style={{ overflowY: 'scroll', maxHeight: '40vh', borderRadius: '10px' }}>
+                        <ul className='list-group border p-1 mb-2' style={{ overflowY: 'scroll', maxHeight: '40vh', borderRadius: '10px' }}>
 
+                            {   
+                                searchResult.map( friend => <FriendsListAddItem key={ friend._id } user={ friend } action={ addUserAsFriend } /> )
+                            }
 
-                    {
-                        searchResult.map( friend => <FriendsListAddItem key={ friend._id } user={ friend } action={ addUserAsFriend } /> )
-                    }
-
-                </ul>
-                
-            </div>
+                        </ul>
+                        
+                    </div>
+                )
+            }
 
         </section>
 

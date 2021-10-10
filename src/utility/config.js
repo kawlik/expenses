@@ -44,7 +44,7 @@ export default {
 
                 post: {
 
-                    addNewBy_userID: '/list/new/',
+                    addNewBy_userID: '/list/add/',
                 },
 
                 put: {

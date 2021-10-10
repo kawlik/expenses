@@ -1,30 +1,35 @@
-import React from 'react';
-
+import React, { useContext, useEffect } from 'react';
 
 // additional components
 import AddNew from './expense/AddNew';
 import Header from './expense/Header';
 import Saved from './expense/Saved';
 
-
 // icon
 import ReadMoreIcon from '@mui/icons-material/ReadMore';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
+
+// store context
+import { StoreContext } from '../context';
+
+// global config
+import config from '../utility/config';
+import { postData } from '../utility/api';
 
 
 /*  Module schema
 /*   *   *   *   *   *   *   *   *   *   */
 
-const Expense = () => {
+const Expense = ({ list }) => {
 
+    
     /*   *   *   *   *   *   *   *   */
 
     return(
     <>
-
         <div className='mb-3 border p-2' style={{ borderRadius: '10px' }}>
 
-            <Header />
+            <Header list={ list }/>
 
             <details className='py-1 w-100 my-2'>
 

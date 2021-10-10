@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 
+// additional components
+import FriendsListAddItem from './profile/FriendsListAddItem';
 
-// local components
-import SelectUser from './SelectUser';
+// store context
+import { StoreContext } from '../context';
 
-
-// icons
-import AddBoxIcon from '@mui/icons-material/AddBox';
+// global config
+import config from '../utility/config';
+import { postData } from '../utility/api';
 
 
 /*  Module schema
@@ -14,21 +16,29 @@ import AddBoxIcon from '@mui/icons-material/AddBox';
 
 const AddNew = () => {
 
+    const { user, setList } = useContext( StoreContext );
 
-    const [ participant, setParticipant ] = useState( '' );
+    const selectUser = async ( event, userID ) => {
+        event.preventDefault();
 
+        try {
 
-    const selectParticipant = ( event ) => {
-        setParticipant( event.target.value );
+            const buffer = await postData( config.API.link.list.post.addNewBy_userID, userID, { auth: user.auth });
+
+            setList( prev => [ ...prev, buffer ] );
+        
+        } catch( err ) {
+
+            return console.error( err );
+        }
     };
-
 
     /*   *   *   *   *   *   *   *   */
 
     return(
     <>        
 
-        <section className='p-2 border' style={{ borderRadius: '10px' }}>
+        <section className='p-2 border mt-5' style={{ borderRadius: '10px' }}>
 
 
             <h2 className='fw-bold fs-5 mb-3'>
@@ -37,31 +47,13 @@ const AddNew = () => {
 
             <ul className='list-group border p-1 mb-2' style={{ overflowY: 'scroll', maxHeight: '40vh', borderRadius: '10px' }}>
 
-                <SelectUser />
-                
-                <SelectUser />
-
-                <SelectUser />
-
-                <SelectUser />
-
-                <SelectUser />
-
-                <SelectUser />
-
-                <SelectUser />
-
-                <SelectUser />
+                {   
+                    !user.friends.length
+                    ?   <h3 className='fw-light fs-4 my-3 mx-2'>Dodaj znajomych, by móc towrzyć rozliczenia!</h3>
+                    :   user.friends.map( friend => <FriendsListAddItem key={ friend._id } user={ friend } action={ ( e ) => selectUser( e, friend._id) } /> )
+                }
 
             </ul>
-
-            <button disabled={ participant === '' } className='w-100 btn btn-outline-success' type='button' style={{ height: '42px', borderRadius: '10px' }}>
-
-                <span style={{ marginRight: '10px', verticalAlign: 'middle' }}><AddBoxIcon style={{ fontSize: '24px' }} /></span>
-                
-                <span style={{ verticalAlign: 'middle' }}>Dodaj</span>
-
-            </button>
 
         </section>
 

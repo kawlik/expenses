@@ -16,7 +16,7 @@ import { getData, fetchFriends } from '../utility/api';
 
 const Login = () => {
 
-    const { setUser } = useContext( StoreContext );
+    const { setUser, setList } = useContext( StoreContext );
 
     const autoLogin = async ( auth ) => {
 
@@ -27,8 +27,12 @@ const Login = () => {
             if( auth === user?.auth ) { 
 
                 user.friends = await fetchFriends( user );
-        
+                
+                const list = await getData( config.API.link.list.get.findAllBy_userID, user._id );
+
+                // store data
                 setUser( user );
+                setList( list );
             };
             
         } catch( err ) {
@@ -72,9 +76,9 @@ const Login = () => {
                     Logowanie
                 </h2>
 
-                <a href={ config.API.auth.facebook } className='w-100 btn btn-outline-primary mb-2' type='button' style={{ height: '42px', borderRadius: '10px' }}>
+                <a href={ config.API.auth.facebook } className='w-100 btn btn-lg btn-outline-primary mb-2' type='button' style={{ borderRadius: '10px' }}>
 
-                    <span style={{ marginRight: '10px', verticalAlign: 'middle' }}><FacebookIcon style={{ fontSize: '28px' }} /></span>
+                    <span style={{ marginRight: '10px', verticalAlign: 'middle' }}><FacebookIcon style={{ fontSize: '32px' }} /></span>
 
                     <span style={{ verticalAlign: 'middle' }}>Zaloguj z Facebook</span>
                     
