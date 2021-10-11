@@ -26,7 +26,9 @@ const Active = () => {
     <>
 
         {
-            unfinishedList.map( item => <ExpenseActive key={ item._id } list={ item } /> )
+            unfinishedList.length
+            ?   unfinishedList.map( item => <ExpenseActive key={ item._id } list={ item } /> )
+            :   <h3 className='fw-light fs-4 mt-5 mx-2 text-center'>Tu pojawiają się aktywne rozliczenia z innymi użytkownikami.</h3>
         }
 
         <AddNew />

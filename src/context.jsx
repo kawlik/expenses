@@ -17,6 +17,7 @@ const StoreProvider = ({ children }) => {
 
     const [ user, setUser ] = useState( null );
     const [ list, setList ] = useState( null );
+    const [ load, setLoad ] = useState( false );
 
 
     /*   *   *   *   *   *   *   *   */
@@ -26,6 +27,8 @@ const StoreProvider = ({ children }) => {
         user, setUser,  //  user propeties
 
         list, setList,  //  list propeties
+
+        load, setLoad,  //  load propeties
     };
 
     /*   *   *   *   *   *   *   *   */

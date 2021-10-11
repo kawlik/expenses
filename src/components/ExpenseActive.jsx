@@ -27,7 +27,7 @@ const Expense = ({ list }) => {
 
     return(
     <>
-        <div className='mb-3 border p-2' style={{ borderRadius: '10px' }}>
+        <div className='mb-3 border p-2 shadow' style={{ borderRadius: '10px' }}>
 
             <Header list={ list }/>
 
@@ -47,7 +47,7 @@ const Expense = ({ list }) => {
                         Dodaj nowy wydatek
                     </h5>
 
-                    <AddNew />
+                    <AddNew list={ list } />
 
                 </div>
 
@@ -57,7 +57,7 @@ const Expense = ({ list }) => {
                         Zapisane wydatki
                     </h5>
 
-                    <Saved />
+                    <Saved list={ list } />
 
                 </div>
 

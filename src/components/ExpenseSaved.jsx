@@ -15,16 +15,16 @@ import SaveAltIcon from '@mui/icons-material/SaveAlt';
 /*  Module schema
 /*   *   *   *   *   *   *   *   *   *   */
 
-const Expense = () => {
+const Expense = ({ list }) => {
 
     /*   *   *   *   *   *   *   *   */
 
     return(
     <>
 
-        <div className='mb-3 border p-2' style={{ borderRadius: '10px' }}>
+        <div className='mb-3 border p-2 shadow' style={{ borderRadius: '10px' }}>
 
-            <Header />
+            <Header list={ list } />
 
             <details className='py-1 w-100 mt-2'>
 
@@ -42,7 +42,7 @@ const Expense = () => {
                         Zapisane wydatki
                     </h5>
 
-                    <Saved />
+                    <Saved list={ list } />
 
                 </div>
 

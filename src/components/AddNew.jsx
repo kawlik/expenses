@@ -25,6 +25,11 @@ const AddNew = () => {
 
             const buffer = await postData( config.API.link.list.post.addNewBy_userID, userID, { auth: user.auth });
 
+            buffer.userA = await getData( config.API.link.user.get.findOneBy_userID, buffer.userA );
+            buffer.userB = await getData( config.API.link.user.get.findOneBy_userID, buffer.userB );
+
+            buffer.expenses = await getData( config.API.link.expense.get.findAllBy_listID, buffer._id );
+
             setList( prev => [ ...prev, buffer ] );
         
         } catch( err ) {
@@ -38,7 +43,7 @@ const AddNew = () => {
     return(
     <>        
 
-        <section className='p-2 border mt-5' style={{ borderRadius: '10px' }}>
+        <section className='p-2 border mt-5 shadow' style={{ borderRadius: '10px' }}>
 
 
             <h2 className='fw-bold fs-5 mb-3'>
@@ -49,7 +54,7 @@ const AddNew = () => {
 
                 {   
                     !user.friends.length
-                    ?   <h3 className='fw-light fs-4 my-3 mx-2'>Dodaj znajomych, by móc towrzyć rozliczenia!</h3>
+                    ?   <h3 className='fw-light fs-4 my-3 mx-2 text-center'>Dodaj znajomych, by móc towrzyć rozliczenia!</h3>
                     :   user.friends.map( friend => <FriendsListAddItem key={ friend._id } user={ friend } action={ ( e ) => selectUser( e, friend._id) } /> )
                 }
 

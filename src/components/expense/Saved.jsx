@@ -1,34 +1,46 @@
 import React from 'react';
 
+// icons
+import LocalAtmIcon from '@mui/icons-material/LocalAtm';
 
 /*  Module schema
 /*   *   *   *   *   *   *   *   *   *   */
 
-const Saved = () => {
+const Saved = ({ list }) => {
 
     /*   *   *   *   *   *   *   *   */
 
     return(
     <>
-        <figure className='m-1 p-1'>
+        {
+            list.expenses.map( item => (
+                
+                <figure key={ item._id } className='m-1 p-1 shadow-sm rounded'>
 
-            <blockquote className='blockquote'>
+                    <blockquote className='blockquote'>
+        
+                        <span className='badge bg-secondary' style={{ verticalAlign: 'middle', marginRight: '10px', minWidth: '84px', height:' 32px', textAlign: 'left' }}>
 
-                <span style={{ marginRight: '10px', verticalAlign: 'middle' }}>
-                    0
-                </span>
+                            <span style={{ verticalAlign: 'middle', marginRight: '5px' }} ><LocalAtmIcon /></span>
 
-                <span style={{ marginRight: '10px', verticalAlign: 'middle' }}>
-                    Wydatek
-                </span>
+                            <span style={{ verticalAlign: 'middle' }} >{ item.value }</span>
 
-            </blockquote>
+                        </span>
+                            
+                        <span style={{ marginRight: '10px', verticalAlign: 'middle' }}>
+                            { item.name }
+                        </span>
+        
+                    </blockquote>
+        
+                    <figcaption className="blockquote-footer">
+                        { list.userA._id === item.user ? list.userA.body.name : list.userB.body.name }
+                    </figcaption>
+        
+                </figure>
 
-            <figcaption className="blockquote-footer">
-                Imię Nazwisko
-            </figcaption>
-
-        </figure>
+            ))
+        }
     </>
     );
 };

@@ -13,7 +13,7 @@ const FriendsListAddItem = ({ user, action }) => {
 
     return(
     <>        
-        <li className='list-group-item' style={{ borderRadius: '10px' }}>
+        <li className='list-group-item shadow-sm p-1' style={{ borderRadius: '10px' }}>
 
             <span style={{ verticalAlign: 'middle', marginRight: '10px' }}><img src={ user.body.picture } alt={ user.body.name } style={{ width: '32px', height:' 32px', borderRadius: '32px' }} /></span>
 

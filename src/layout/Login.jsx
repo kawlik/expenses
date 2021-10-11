@@ -30,6 +30,14 @@ const Login = () => {
                 
                 const list = await getData( config.API.link.list.get.findAllBy_userID, user._id );
 
+                for( const item of list ) {
+
+                    item.userA = await getData( config.API.link.user.get.findOneBy_userID, item.userA );
+                    item.userB = await getData( config.API.link.user.get.findOneBy_userID, item.userB );
+
+                    item.expenses = await getData( config.API.link.expense.get.findAllBy_listID, item._id );
+                };
+
                 // store data
                 setUser( user );
                 setList( list );

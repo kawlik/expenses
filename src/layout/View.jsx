@@ -20,7 +20,6 @@ const View = () => {
 
     /*   *   *   *   *   *   *   *   */
 
-
     const touch = { x: null, y: null };
 
     const handleTouchStart = ( event ) => {
@@ -84,7 +83,6 @@ const View = () => {
     }
 
     /*   *   *   *   *   *   *   *   */
-
 
     useEffect(() => {
 
