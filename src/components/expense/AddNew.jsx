@@ -38,6 +38,8 @@ const AddNew = ({ list }) => {
     const addNewExpense = async ( event ) => {
         event.preventDefault();
 
+        event.target.closest( 'button' ).classList.add( 'loading' );
+
         const expense = {
             auth: user.auth,
             data: {
@@ -61,8 +63,12 @@ const AddNew = ({ list }) => {
 
         } catch( err ) {
 
+            event.target.closest( 'button' ).classList.remove( 'loading' );
+
             return console.error( err );
         }
+
+        event.target.closest( 'button' ).classList.remove( 'loading' );
     };
 
 

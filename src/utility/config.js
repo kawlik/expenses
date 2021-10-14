@@ -49,7 +49,7 @@ export default {
 
                 put: {
 
-                    lockBy_listID: '/list/locl/',
+                    lockBy_listID: '/list/lock/',
                 },
             },
 

@@ -53,6 +53,8 @@ const Profile = () => {
     const addUserAsFriend = async ( event, userID ) => {
         event.preventDefault();
 
+        event.target.closest( 'button' ).classList.add( 'loading' );
+
         try {
 
             const buffer = await putData( config.API.link.user.put.addNewAsFriendBy_userID, userID, { auth: user.auth });
@@ -64,12 +66,18 @@ const Profile = () => {
 
         } catch( err ) {
 
+            event.target.closest( 'button' ).classList.remove( 'loading' );
+
             return console.error( err );
         }
+
+        event.target.closest( 'button' ).classList.remove( 'loading' );
     };
 
     const removeUserAsFriend = async ( event, userID ) => {
         event.preventDefault();
+
+        event.target.closest( 'button' ).classList.add( 'loading' );
 
         try {
 
@@ -82,8 +90,12 @@ const Profile = () => {
 
         } catch( err ) {
 
+            event.target.closest( 'button' ).classList.remove( 'loading' );
+
             return console.error( err );
         }
+
+        event.target.closest( 'button' ).classList.remove( 'loading' );
     };
 
     /*   *   *   *   *   *   *   *   */

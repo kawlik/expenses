@@ -8,7 +8,7 @@ import { StoreContext } from '../context';
 
 // global config
 import config from '../utility/config';
-import { postData } from '../utility/api';
+import { getData, postData } from '../utility/api';
 
 
 /*  Module schema
@@ -20,6 +20,8 @@ const AddNew = () => {
 
     const selectUser = async ( event, userID ) => {
         event.preventDefault();
+
+        event.target.closest( 'button' ).classList.add( 'loading' );
 
         try {
 
@@ -34,8 +36,12 @@ const AddNew = () => {
         
         } catch( err ) {
 
+            event.target.closest( 'button' ).classList.remove( 'loading' );
+
             return console.error( err );
         }
+
+        event.target.closest( 'button' ).classList.remove( 'loading' );
     };
 
     /*   *   *   *   *   *   *   *   */
@@ -54,7 +60,7 @@ const AddNew = () => {
 
                 {   
                     !user.friends.length
-                    ?   <h3 className='fw-light fs-4 my-3 mx-2 text-center'>Dodaj znajomych, by móc towrzyć rozliczenia!</h3>
+                    ?   <h3 className='fw-light fs-4 mt-5 mx-2 text-center'>Dodaj znajomych, by móc towrzyć rozliczenia!</h3>
                     :   user.friends.map( friend => <FriendsListAddItem key={ friend._id } user={ friend } action={ ( e ) => selectUser( e, friend._id) } /> )
                 }
 

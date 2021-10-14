@@ -18,6 +18,43 @@ const Login = () => {
 
     const { setUser, setList } = useContext( StoreContext );
 
+    const documentHasCookie = ( name ) => {
+
+        if( document.cookie !== '' ) {
+
+            const cookies = document.cookie.split( /; */ );
+
+            for( const cookie of cookies ) {
+
+                const [ key, val ] = cookie.split( '=' );
+
+                if( key === decodeURIComponent( name )) {
+
+                    // cookie has been found
+                    return true;
+                }
+            }
+        }
+
+        // coockie has not been found
+        return false;
+    }
+
+    const documentReadCookie = ( name ) => {
+
+        const cookies = document.cookie.split( /; */ );
+
+        for( const cookie of cookies ) {
+
+            const [ key, val ] = cookie.split( '=' );
+
+            if( key === decodeURIComponent( name )) {
+
+                return val;
+            }
+        }
+    };
+
     const autoLogin = async ( auth ) => {
 
         try {
@@ -53,18 +90,16 @@ const Login = () => {
 
     useEffect(() => {
 
-        // init url search
-        const url = new URL( window.location.href );
-        const params = new URLSearchParams( url.search );
-
-        // proces login with url
-        if( params.has( 'auth' )) {
-
-            autoLogin( params.get( 'auth' ));
-        }
-
         // clears url history
         window.history.replaceState( null, document.title, window.location.pathname );
+
+        // reads cookie name auth and tries to proces login
+        if( documentHasCookie( 'auth' )) {
+
+            const auth = documentReadCookie( 'auth' );
+
+            autoLogin( auth );
+        };
 
     }, []);
 
