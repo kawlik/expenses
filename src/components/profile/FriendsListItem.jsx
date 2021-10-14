@@ -21,8 +21,12 @@ const FriendsListItem = ({ user, action }) => {
                 { user.body.name }
             </span>
 
-            <button type='button' className='btn btn-outline-danger py-1 px-3' onClick={ ( e ) => action( e, user._id ) } style={{ borderRadius: '10px', float: 'right' }}>
-                <IndeterminateCheckBoxIcon style={{ verticalAlign: 'middle' }} />
+            <button onClick={ ( e ) => action( e, user._id ) } type='button' className='btn btn-outline-danger mt-2 w-100' style={{ height: '42px', borderRadius: '10px' }}>
+
+                <span style={{ marginRight: '10px', verticalAlign: 'middle' }}><IndeterminateCheckBoxIcon style={{ fontSize: '24px' }} /></span>
+
+                <span style={{ verticalAlign: 'middle' }}>Usuń</span>
+
             </button>
 
         </li>
