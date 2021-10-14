@@ -23,8 +23,6 @@ import { putData } from '../utility/api';
 
 const Expense = ({ list }) => {
 
-    console.log( list );
-
     const { user, setList } = useContext( StoreContext );
 
     const lockList = async ( event ) => {
