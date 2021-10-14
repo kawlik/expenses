@@ -12,6 +12,7 @@ import config from '../utility/config';
 import { getData, putData, fetchFriends } from '../utility/api';
 
 // icons
+import LogoutIcon from '@mui/icons-material/Logout';
 import SearchIcon from '@mui/icons-material/Search';
 
 
@@ -20,7 +21,7 @@ import SearchIcon from '@mui/icons-material/Search';
 
 const Profile = () => {
 
-    const { user, setUser } = useContext( StoreContext );
+    const { user, setUser, setList, setLoad } = useContext( StoreContext );
 
     const [ searchFriend, setSearchFriend ] = useState( '' );
     const [ searchResult, setSearchResult ] = useState( [] );
@@ -37,7 +38,22 @@ const Profile = () => {
     
                 const buffer = await getData( config.API.link.user.get.findAllBy_name + search );
 
-                setSearchResult( buffer.filter( buffered => ( buffered._id !== user._id ) || !user.friend.includes( buffered )));
+                const bufferNoUser = buffer.filter( buffered => buffered._id !== user._id );
+
+                const bufferNoFriends = bufferNoUser.filter( buffered => {
+
+                    for( const { _id } of user.friends ) {
+                        
+                        if( _id === buffered._id ) {
+
+                            return false;
+                        }
+                    }
+
+                    return true;
+                });
+
+                setSearchResult( bufferNoFriends );
 
             } else {
 
@@ -98,6 +114,27 @@ const Profile = () => {
         event.target.closest( 'button' ).classList.remove( 'loading' );
     };
 
+    const logout = ( event ) => {
+        event.preventDefault();
+
+        event.target.closest( 'button' ).classList.add( 'loading' );
+
+        const cookies = document.cookie.split( /; */ );
+
+        for( const cookie of cookies ) {
+
+            const [ key, val ] = cookie.split( '=' );
+
+            document.cookie = key + `=;expires${ Date.now() - 1 }`;
+        }
+
+        setUser( null );
+        setList( null );
+        setLoad( false );
+
+        event.target.closest( 'button' ).classList.remove( 'loading' );
+    };
+
     /*   *   *   *   *   *   *   *   */
 
     return(
@@ -110,6 +147,14 @@ const Profile = () => {
             <span style={{ verticalAlign: 'middle', fontSize: '32px', fontWeight: '300' }}>
                 { user.body.name }
             </span>
+
+            <button onClick={ logout } className='w-100 btn btn-outline-danger mt-3' type='button' style={{ borderRadius: '10px' }}>
+
+                <span style={{ marginRight: '10px', verticalAlign: 'middle' }}><LogoutIcon style={{ fontSize: '24px' }} /></span>
+
+                <span style={{ verticalAlign: 'middle' }}>Wyloguj</span>
+
+            </button>
 
             <hr />
             

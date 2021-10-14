@@ -82,6 +82,7 @@ const AddNew = ({ list }) => {
 
                 <select value={ participant } onChange={ selectParticipant } className='form-select' style={{ height: '42px', borderRadius: '10px' }}>
 
+                    <option value='' hidden>Wybierz osobę z listy</option>
                     <option value={ list.userA._id }>{ list.userA.body.name }</option>
                     <option value={ list.userB._id }>{ list.userB.body.name }</option>
                 
